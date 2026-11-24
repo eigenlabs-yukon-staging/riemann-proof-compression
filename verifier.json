@@ -1,0 +1,52 @@
+{
+  "version": 1,
+  "id": "riemann-proof-compression",
+  "rules_path": "rules.md",
+  "review_standard": "lean-proof-compression-review-v1",
+  "objectives": [
+    {
+      "name": "source_bytes",
+      "direction": "-",
+      "unit": "bytes",
+      "semantics": "Total submitted source bytes needed to rebuild the proof of the exact protected Riemann hypothesis statement. Lower is better; invalid submissions receive no score."
+    }
+  ],
+  "allow_unscored": false,
+  "policies": {
+    "scoring": {
+      "version": "minimize-source-bytes-v1"
+    },
+    "validity": {
+      "version": "lean-proof-equivalence-v1"
+    }
+  },
+  "supported_policies": {
+    "scoring": [
+      {
+        "selector": {
+          "version": "minimize-source-bytes-v1"
+        },
+        "instructions": "For valid submissions only, return one score: source_bytes. Count all submitted source/helper files required by the proof under the pinned counting rule. Lower is better. Do not award a score if the proof, theorem statement, axiom check, or reproducible byte count is missing."
+      }
+    ],
+    "validity": [
+      {
+        "selector": {
+          "version": "lean-proof-equivalence-v1"
+        },
+        "instructions": "A valid solution proves the exact protected RH theorem from the pinned baseline with no new axioms, no holes, no unsound options, and no verifier changes. Reject theorem weakening, altered definitions, unpinned dependencies, or non-reproducible builds."
+      }
+    ]
+  },
+  "provider": {
+    "model": "gpt-6-astra",
+    "reasoning_effort": "high",
+    "max_completion_tokens": 32768,
+    "timeout_seconds": 1200,
+    "background": true,
+    "max_attempts": 1
+  },
+  "limits": {
+    "max_followups": 3
+  }
+}

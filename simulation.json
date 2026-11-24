@@ -1,0 +1,49 @@
+{
+  "initial_results": [
+    {
+      "source_bytes": 120000,
+      "builds": true,
+      "same_statement": true,
+      "new_axioms": false
+    }
+  ],
+  "initial_decision": {
+    "kind": "followup",
+    "judgment": null,
+    "requests": [
+      {
+        "experiment": "lean_check",
+        "inputs": {
+          "source_bytes": 120000
+        },
+        "reason": "Confirm the proof rebuilds and the byte count is reproducible under the pinned verifier."
+      }
+    ]
+  },
+  "followup_results": [
+    {
+      "source_bytes": 120000,
+      "builds": true,
+      "same_statement": true,
+      "new_axioms": false
+    }
+  ],
+  "final_decision": {
+    "kind": "judgment",
+    "judgment": {
+      "valid": true,
+      "scores": [
+        120000
+      ],
+      "reason": "The sample submission is treated as valid only if it rebuilds the protected theorem unchanged, introduces no new axioms, and has a reproducible source byte count.",
+      "evidence_refs": [
+        "source:proof.md",
+        "source:submission.json",
+        "run:initial:0",
+        "run:followup:0"
+      ],
+      "review_standard": "lean-proof-compression-review-v1"
+    },
+    "requests": []
+  }
+}

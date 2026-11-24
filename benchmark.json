@@ -1,0 +1,65 @@
+{
+  "schemaVersion": 2,
+  "name": "riemann-proof-compression",
+  "tracks": [
+    {
+      "name": "main",
+      "description": "Compress the pinned Lean Riemann hypothesis proof while preserving the exact theorem statement and adding no axioms. Score is total submitted source bytes; lower is better.",
+      "category": "math",
+      "mode": "pareto",
+      "promotionMode": "manual",
+      "direction": "-",
+      "objectives": [
+        {
+          "name": "source_bytes",
+          "direction": "-"
+        }
+      ],
+      "paretoPolicies": {
+        "scoring": {
+          "version": "minimize-source-bytes-v1"
+        },
+        "validity": {
+          "version": "lean-proof-equivalence-v1"
+        }
+      },
+      "editablePaths": [
+        "submission"
+      ],
+      "submissionAdmission": {
+        "version": 1,
+        "submissionReferencesEnabled": false
+      },
+      "setupCommand": [
+        "llm-verifier",
+        "intake",
+        "--root",
+        ".",
+        "--out",
+        ".yukon/work/intake.json"
+      ],
+      "benchmarkCommand": [
+        "llm-verifier",
+        "finalize",
+        "--intake",
+        ".yukon/work/intake.json",
+        "--initial",
+        ".yukon/work/initial.json",
+        "--initial-review",
+        ".yukon/work/review.json",
+        "--score",
+        ".yukon/score.json",
+        "--dossier",
+        ".yukon/dossier.json"
+      ],
+      "scorePath": ".yukon/score.json",
+      "maxSubmissionBytes": 262144,
+      "runner": {
+        "provider": "github-actions",
+        "workflow": "benchmark.yml",
+        "scoreArtifactName": "benchmark-score",
+        "maxConcurrentWorkflows": 2
+      }
+    }
+  ]
+}

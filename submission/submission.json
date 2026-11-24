@@ -1,0 +1,35 @@
+{
+  "version": 1,
+  "title": "Compressed Lean RH proof candidate",
+  "claims": [
+    "The submitted Lean package proves the exact protected Riemann hypothesis statement from the pinned baseline.",
+    "The submitted package introduces no new axioms, proof holes, unsound options, or verifier changes.",
+    "The reported source byte count covers every submitted source/helper file required to rebuild the proof."
+  ],
+  "experiments": [
+    {
+      "id": "lean_check",
+      "source": "check.py",
+      "purpose": "Placeholder deterministic verifier: before launch, replace with the pinned Lean build, protected theorem check, axiom-dependency report, and byte-count command.",
+      "input_schema": {
+        "type": "object",
+        "properties": {
+          "source_bytes": {
+            "type": "integer",
+            "minimum": 1,
+            "maximum": 10000000
+          }
+        },
+        "required": [
+          "source_bytes"
+        ],
+        "additionalProperties": false
+      },
+      "initial_inputs": [
+        {
+          "source_bytes": 120000
+        }
+      ]
+    }
+  ]
+}
